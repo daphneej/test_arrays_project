@@ -4,14 +4,13 @@ import ht.codingparadise.testarraysproject.main.Rarray;
 import ht.codingparadise.testarraysproject.main.RarrayError;
 import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class RarrayTest {
 
-    ArrayList<String> listeDesFruits = new ArrayList<String>(){
+    ArrayList<String> listeDesFruits = new ArrayList<>() {
         {
             add("Pomme");
             add("Pomme");
@@ -27,19 +26,19 @@ class RarrayTest {
     RarrayTest() throws RarrayError {
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void add() {
 
         int tailleAvantAjout = listeDesFruits.size();
         rarray.add("Pomme");
         int tailleApresAjout = listeDesFruits.size();
 
-        Assert.assertTrue(tailleAvantAjout < tailleApresAjout);
+        Assertions.assertTrue(tailleAvantAjout < tailleApresAjout);
 
         listeDesFruits.forEach(System.out::println);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void remove() {
         int tailleAvantAjout = listeDesFruits.size();
         rarray.remove("Pomme");
@@ -50,16 +49,16 @@ class RarrayTest {
         listeDesFruits.forEach(System.out::println);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void removeAll() {
         rarray.removeAll("Pomme");
         Assert.assertFalse(listeDesFruits.contains("Pomme"));
         listeDesFruits.forEach(System.out::println);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void clear() {
-          int tailleAvantAjout = listeDesFruits.size();
+        int tailleAvantAjout = listeDesFruits.size();
         rarray.clear();
         int tailleApresAjout = listeDesFruits.size();
 
@@ -68,20 +67,25 @@ class RarrayTest {
         listeDesFruits.forEach(System.out::println);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void contains() {
         Assert.assertTrue(listeDesFruits.contains("Pomme"));
         listeDesFruits.forEach(System.out::println);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void nbOcc() {
-//        Integer nombreOccurence = rarray.nbOcc("Pomme");
-//
-//        assertInstanceOf(nombreOccurence, new Integer(nombreOccurence));
+        int sizeDeListeDesFruitsARechercher = this.listeDesFruits
+                .stream()
+                .filter(fruit -> fruit == "Pomme")
+                .toList()
+                .size();
+
+        Assertions.assertTrue(rarray.nbOcc("Pomme") == sizeDeListeDesFruitsARechercher);
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void size() {
+        Assertions.assertTrue(rarray.size() == this.listeDesFruits.size());
     }
 }

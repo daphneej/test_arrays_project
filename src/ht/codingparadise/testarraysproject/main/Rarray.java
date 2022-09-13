@@ -47,6 +47,6 @@ public class Rarray {
     }
 
     public int size() {
-          return 0;
+          return this.fruits.size();
     }
 }
