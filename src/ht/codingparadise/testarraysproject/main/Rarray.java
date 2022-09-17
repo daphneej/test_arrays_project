@@ -2,51 +2,51 @@ package ht.codingparadise.testarraysproject.main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Objects;
 
 public class Rarray {
 
-     private ArrayList<String> fruits;
+     private final ArrayList<String> fruits;
      private int capacite;
 
-     public Rarray(int capacite, ArrayList fruits) throws RarrayError {
+     public Rarray(int capacite, ArrayList<String> fruits) throws RarrayError {
           this.fruits = fruits;
      }
 
     public void add(String fruit) {
-          this.fruits.add(fruit);
+          fruits.add(fruit);
     }
 
     public boolean remove(String fruit) {
-          return this.fruits.remove(fruit);
+          return fruits.remove(fruit);
     }
 
     public boolean removeAll(String fruit) {
         List<String> listeDesFruitsASupprimer = fruits
                 .stream()
-                .filter((chaqueFruit) -> chaqueFruit == fruit)
+                .filter((chaqueFruit) -> Objects.equals(chaqueFruit, fruit))
                 .toList();
 
-        return this.fruits.removeAll(listeDesFruitsASupprimer);
+        return fruits.removeAll(listeDesFruitsASupprimer);
     }
 
     public void clear() {
-          this.fruits.clear();
+          fruits.clear();
     }
 
     public boolean contains(String fruit) {
-          return this.fruits.contains(fruit);
+          return fruits.contains(fruit);
     }
 
     public int nbOcc(String fruit) {
-          return this.fruits
+          return fruits
                   .stream()
-                  .filter(chaqueFruit -> chaqueFruit == fruit)
+                  .filter(chaqueFruit -> chaqueFruit.equals(fruit))
                   .toList()
                   .size();
     }
 
     public int size() {
-          return this.fruits.size();
+          return fruits.size();
     }
 }
