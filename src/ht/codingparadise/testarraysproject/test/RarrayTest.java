@@ -2,15 +2,15 @@ package ht.codingparadise.testarraysproject.test;
 
 import ht.codingparadise.testarraysproject.main.Rarray;
 import ht.codingparadise.testarraysproject.main.RarrayError;
-import org.junit.Assert;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 class RarrayTest {
 
-    ArrayList<String> listeDesFruits = new ArrayList<>() {
+    ArrayList<String> fruits = new ArrayList<>() {
         {
             add("Pomme");
             add("Pomme");
@@ -21,71 +21,70 @@ class RarrayTest {
         }
     };
 
-    Rarray rarray = new Rarray(0, listeDesFruits);
+    Rarray rarray = new Rarray(0, fruits);
 
     RarrayTest() throws RarrayError {
     }
 
     @Test
     void add() {
-
-        int tailleAvantAjout = listeDesFruits.size();
+        int tailleAvantAjout = rarray.size();
         rarray.add("Pomme");
-        int tailleApresAjout = listeDesFruits.size();
+        int tailleApresAjout = rarray.size();
 
         Assertions.assertTrue(tailleAvantAjout < tailleApresAjout);
 
-        listeDesFruits.forEach(System.out::println);
+        fruits.forEach(System.out::println);
     }
 
     @Test
     void remove() {
-        int tailleAvantAjout = listeDesFruits.size();
+        int tailleAvantAjout = fruits.size();
         rarray.remove("Pomme");
-        int tailleApresAjout = listeDesFruits.size();
+        int tailleApresAjout = fruits.size();
 
-        Assert.assertTrue(tailleAvantAjout > tailleApresAjout);
+        Assertions.assertTrue(tailleAvantAjout > tailleApresAjout);
 
-        listeDesFruits.forEach(System.out::println);
+        fruits.forEach(System.out::println);
     }
 
     @Test
     void removeAll() {
         rarray.removeAll("Pomme");
-        Assert.assertFalse(listeDesFruits.contains("Pomme"));
-        listeDesFruits.forEach(System.out::println);
+        Assertions.assertFalse(fruits.contains("Pomme"));
+        fruits.forEach(System.out::println);
     }
 
     @Test
     void clear() {
-        int tailleAvantAjout = listeDesFruits.size();
+        int tailleAvantAjout = fruits.size();
         rarray.clear();
-        int tailleApresAjout = listeDesFruits.size();
+        int tailleApresAjout = fruits.size();
 
-        Assert.assertTrue(tailleAvantAjout > 0 && tailleApresAjout == 0);
+        Assertions.assertTrue(tailleAvantAjout > 0 && tailleApresAjout == 0);
 
-        listeDesFruits.forEach(System.out::println);
+        fruits.forEach(System.out::println);
     }
 
     @Test
     void contains() {
-        Assert.assertTrue(listeDesFruits.contains("Pomme"));
-        listeDesFruits.forEach(System.out::println);
+        Assertions.assertTrue(fruits.contains("Pomme"));
+        fruits.forEach(System.out::println);
     }
 
     @Test
     void nbOcc() {
-        int sizeDeListeDesFruitsARechercher = this.listeDesFruits
+        int sizeDeListeDesFruitsARechercher = this.fruits
                 .stream()
-                .filter(fruit -> fruit == "Pomme")
+                .filter(fruit -> Objects.equals(fruit, "Pomme"))
                 .toList()
                 .size();
 
-        Assertions.assertTrue(rarray.nbOcc("Pomme") == sizeDeListeDesFruitsARechercher);
+        Assertions.assertEquals(rarray.nbOcc("Pomme"), sizeDeListeDesFruitsARechercher);
     }
 
     @Test
     void size() {
-        Assertions.assertTrue(rarray.size() == this.listeDesFruits.size());
+        Assertions.assertEquals(rarray.size(), this.fruits.size());
     }
 }
